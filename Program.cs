@@ -1,4 +1,4 @@
-using Microsoft.EntityFrameworkCore;
+п»їusing Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using OfficeOpenXml;
 using System.Xml.Linq;
@@ -22,7 +22,7 @@ namespace WPF1
         private const string PatronymicWord = "Patronymic";
         private const string CityWord = "City";
         private const string CountryWord = "Country";
-        private const string WorksheetWord = "Лист1";
+        private const string WorksheetWord = "Р›РёСЃС‚1";
 
         private List<User> _listOfUsersFromFile = new List<User>();
         internal List<User> ListOfUsersFromDB = new List<User>();
@@ -38,9 +38,9 @@ namespace WPF1
         }
 
         /// <summary>
-        /// Асинхронный метод чтения данных из CSV файла.
+        /// РђСЃРёРЅС…СЂРѕРЅРЅС‹Р№ РјРµС‚РѕРґ С‡С‚РµРЅРёСЏ РґР°РЅРЅС‹С… РёР· CSV С„Р°Р№Р»Р°.
         /// </summary>
-        /// <param name="fileName"> Имя файла для чтения. </param>
+        /// <param name="fileName"> РРјСЏ С„Р°Р№Р»Р° РґР»СЏ С‡С‚РµРЅРёСЏ. </param>
         /// <returns></returns>
         public async Task ReadFromCsvFileAsync(string fileName)
         {
@@ -61,21 +61,21 @@ namespace WPF1
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Выбранный файл невозможно открыть. Возможно он поврежден.");
+                MessageBox.Show("Р’С‹Р±СЂР°РЅРЅС‹Р№ С„Р°Р№Р» РЅРµРІРѕР·РјРѕР¶РЅРѕ РѕС‚РєСЂС‹С‚СЊ. Р’РѕР·РјРѕР¶РЅРѕ РѕРЅ РїРѕРІСЂРµР¶РґРµРЅ.");
             }
         }
 
         /// <summary>
-        /// Асинхронный метод записи выборки из БД в Excel файл.
+        /// РђСЃРёРЅС…СЂРѕРЅРЅС‹Р№ РјРµС‚РѕРґ Р·Р°РїРёСЃРё РІС‹Р±РѕСЂРєРё РёР· Р‘Р” РІ Excel С„Р°Р№Р».
         /// </summary>
-        /// <param name="excelFileName"> Имя создаваемого файла. </param>
+        /// <param name="excelFileName"> РРјСЏ СЃРѕР·РґР°РІР°РµРјРѕРіРѕ С„Р°Р№Р»Р°. </param>
         /// <returns></returns>
         public async Task WriteIntoExcelFileAsync(string excelFileName)
         {
             try
             {
                 if (ListOfUsersFromDB.IsNullOrEmpty())
-                    throw new Exception("Выборка не была осуществена!");
+                    throw new Exception("Р’С‹Р±РѕСЂРєР° РЅРµ Р±С‹Р»Р° РѕСЃСѓС‰РµСЃС‚РІРµРЅР°!");
 
                 ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
@@ -104,26 +104,26 @@ namespace WPF1
                     
                     await excelPackage.SaveAsAsync(excelFile);
                 }
-                MessageBox.Show("Excel файл " + excelFileName + " создан");
+                MessageBox.Show("Excel С„Р°Р№Р» " + excelFileName + " СЃРѕР·РґР°РЅ");
                 ListOfUsersFromDB.Clear();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Не удалось создать Excel файл!");
+                MessageBox.Show("РќРµ СѓРґР°Р»РѕСЃСЊ СЃРѕР·РґР°С‚СЊ Excel С„Р°Р№Р»!");
             }
         }
 
         /// <summary>
-        /// Асинхронный метод записи выборки из БД в Xml файл.
+        /// РђСЃРёРЅС…СЂРѕРЅРЅС‹Р№ РјРµС‚РѕРґ Р·Р°РїРёСЃРё РІС‹Р±РѕСЂРєРё РёР· Р‘Р” РІ Xml С„Р°Р№Р».
         /// </summary>
-        /// <param name="xmlFileName"> Имя создаваемого файла. </param>
+        /// <param name="xmlFileName"> РРјСЏ СЃРѕР·РґР°РІР°РµРјРѕРіРѕ С„Р°Р№Р»Р°. </param>
         /// <returns></returns>
         public async Task WriteIntoXmlFileAsync(string xmlFileName)
         {
             try
             {
                 if (ListOfUsersFromDB.IsNullOrEmpty()) 
-                    throw new Exception("Выборка не была осуществена!");
+                    throw new Exception("Р’С‹Р±РѕСЂРєР° РЅРµ Р±С‹Р»Р° РѕСЃСѓС‰РµСЃС‚РІРµРЅР°!");
 
                 XDocument xDoc = new XDocument();
                 XElement users = new XElement(UsersWord);
@@ -145,17 +145,17 @@ namespace WPF1
 
                 await Task.Factory.StartNew(() => xDoc.Save(xmlFileName));
 
-                MessageBox.Show("XML файл " + xmlFileName + " создан");
+                MessageBox.Show("XML С„Р°Р№Р» " + xmlFileName + " СЃРѕР·РґР°РЅ");
                 ListOfUsersFromDB.Clear();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Не удалось создать XML файл!");
+                MessageBox.Show("РќРµ СѓРґР°Р»РѕСЃСЊ СЃРѕР·РґР°С‚СЊ XML С„Р°Р№Р»!");
             }
         }
 
         /// <summary>
-        /// Асинхронный метод записи данных в БД.
+        /// РђСЃРёРЅС…СЂРѕРЅРЅС‹Р№ РјРµС‚РѕРґ Р·Р°РїРёСЃРё РґР°РЅРЅС‹С… РІ Р‘Р”.
         /// </summary>
         /// <returns></returns>
         public async Task AddToDBAsync()
@@ -174,10 +174,10 @@ namespace WPF1
         }
 
         /// <summary>
-        /// Асинхронный метод чтения данных из БД для создания выборки 
-        /// по любой комбинации полей.
+        /// РђСЃРёРЅС…СЂРѕРЅРЅС‹Р№ РјРµС‚РѕРґ С‡С‚РµРЅРёСЏ РґР°РЅРЅС‹С… РёР· Р‘Р” РґР»СЏ СЃРѕР·РґР°РЅРёСЏ РІС‹Р±РѕСЂРєРё 
+        /// РїРѕ Р»СЋР±РѕР№ РєРѕРјР±РёРЅР°С†РёРё РїРѕР»РµР№.
         /// </summary>
-        /// <param name="dataForExport"> Массив значений полей для выборки. </param>
+        /// <param name="dataForExport"> РњР°СЃСЃРёРІ Р·РЅР°С‡РµРЅРёР№ РїРѕР»РµР№ РґР»СЏ РІС‹Р±РѕСЂРєРё. </param>
         /// <returns></returns>
         public async Task ReadFromDBAsync(string[] dataForExport)
         {
@@ -193,7 +193,7 @@ namespace WPF1
                     ListOfUsersFromDB = await
                                 (from user in db.Users
                                  where
-                                 EF.Functions.Like(user.Date.ToString(), dataForExport[0]) && //гггг-мм-дд
+                                 EF.Functions.Like(user.Date.ToString(), dataForExport[0]) && //РіРіРіРі-РјРј-РґРґ
                                  EF.Functions.Like(user.FirstName, dataForExport[1]) &&
                                  EF.Functions.Like(user.LastName, dataForExport[2]) &&
                                  EF.Functions.Like(user.Patronymic, dataForExport[3]) &&
@@ -204,14 +204,14 @@ namespace WPF1
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Сначала загрузите файл!");
+                MessageBox.Show("РЎРЅР°С‡Р°Р»Р° Р·Р°РіСЂСѓР·РёС‚Рµ С„Р°Р№Р»!");
             }
         }
 
         /// <summary>
-        /// Метод преобразования даты в формат БД.
+        /// РњРµС‚РѕРґ РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёСЏ РґР°С‚С‹ РІ С„РѕСЂРјР°С‚ Р‘Р”.
         /// </summary>
-        /// <param name="date"> Преобразуемая дата. </param>
+        /// <param name="date"> РџСЂРµРѕР±СЂР°Р·СѓРµРјР°СЏ РґР°С‚Р°. </param>
         /// <returns></returns>
         public String FormateDate(string date)
         {

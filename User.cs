@@ -1,17 +1,20 @@
-﻿namespace WPF1
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace WPF1
 {
     internal class User
     {
-        internal int Id { get; set; }
-        internal DateOnly Date { get; set; }
-        internal string FirstName { get; set; }
-        internal string LastName { get; set; }
-        internal string Patronymic { get; set; }
-        internal string City { get; set; }
-        internal string Country { get; set; }
+        [Key]
+        public int Id { get; set; }
+        public DateOnly Date { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Patronymic { get; set; }
+        public string City { get; set; }
+        public string Country { get; set; }
 
-        internal User() { }
-        internal User(string[] data)
+        public User() { }
+        public User(string[] data)
         {
             Date = DateOnly.Parse(data[0]);
             FirstName = data[1];
